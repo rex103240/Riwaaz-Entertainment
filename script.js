@@ -25,6 +25,18 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Mobile Blogs dropdown toggle
+    const mobileDropdownToggle = document.getElementById('mobileDropdownToggle');
+    const mobileDropdownLinks = document.getElementById('mobileDropdownLinks');
+    if (mobileDropdownToggle && mobileDropdownLinks) {
+        mobileDropdownToggle.addEventListener('click', () => {
+            mobileDropdownToggle.classList.toggle('open');
+            mobileDropdownLinks.classList.toggle('open');
+            const isOpen = mobileDropdownToggle.classList.contains('open');
+            mobileDropdownToggle.setAttribute('aria-expanded', isOpen);
+        });
+    }
+
     // 3. Header Scroll Effect
     const header = document.querySelector('.site-header');
     if (header) {
