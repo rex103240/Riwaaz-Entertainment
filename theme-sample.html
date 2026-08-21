@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Font & Theme Sample — Riwaaz Entertainment</title>
+
+  <!-- Font Pairing:
+       DISPLAY  → Cormorant Garamond (tall, aristocratic, bridal)
+       BODY     → Jost (clean geometric sans, premium readability) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* ── Tokens ── */
+    :root {
+      --blush:      #FAF0EC;   /* logo background, warm cream-blush    */
+      --blush-dark: #F2E1D8;   /* slightly deeper for section contrast */
+      --crimson:    #7B1428;   /* deep crimson from logo "R"           */
+      --crimson-dk: #5A0D1C;   /* darker shade for hover / text        */
+      --gold:       #C6922A;   /* antique gold from logo border        */
+      --gold-lt:    #E2B96A;   /* lighter gold for highlights          */
+      --text:       #2A1018;   /* near-black with warm undertone       */
+      --muted:      #7A5A62;   /* warm muted for body copy             */
+      --line:       #E8D5CE;   /* soft divider lines                   */
+      --white:      #FFFFFF;
+
+      --display: 'Cormorant Garamond', Georgia, serif;
+      --body:    'Jost', system-ui, sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--body);
+      background: var(--blush);
+      color: var(--text);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Utility ── */
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 60px); }
+    .text-center { text-align: center; }
+
+    /* ── Nav ── */
+    .nav {
+      background: var(--blush);
+      border-bottom: 1px solid var(--line);
+      padding: 18px clamp(20px, 5vw, 60px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .nav-brand {
+      font-family: var(--display);
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--crimson);
+      letter-spacing: 0.02em;
+      text-decoration: none;
+    }
+    .nav-brand span {
+      font-weight: 300;
+      font-style: italic;
+      color: var(--gold);
+    }
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-family: var(--body);
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--crimson); }
+    .btn-nav {
+      font-family: var(--body);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      background: var(--crimson);
+      color: var(--white);
+      border: none;
+      padding: 12px 28px;
+      border-radius: 100px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-nav:hover { background: var(--crimson-dk); }
+
+    /* ── Hero ── */
+    .hero {
+      background: var(--crimson);
+      padding: clamp(80px, 12vw, 140px) 0 clamp(60px, 10vw, 120px);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 60% at 50% 0%, rgba(198,146,42,0.25) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-eyebrow {
+      font-family: var(--body);
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold-lt);
+      display: block;
+      margin-bottom: 20px;
+    }
+    .hero h1 {
+      font-family: var(--display);
+      font-size: clamp(3rem, 7vw, 6rem);
+      font-weight: 400;
+      color: var(--blush);
+      line-height: 1.05;
+      margin-bottom: 10px;
+    }
+    .hero h1 em {
+      font-style: italic;
+      font-weight: 300;
+      color: var(--gold-lt);
+    }
+    .hero-sub {
+      font-family: var(--body);
+      font-size: clamp(0.95rem, 1.8vw, 1.15rem);
+      font-weight: 300;
+      color: rgba(250,240,236,0.72);
+      max-width: 520px;
+      margin: 22px auto 40px;
+      letter-spacing: 0.01em;
+    }
+    .hero-ctas {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      font-family: var(--body);
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      background: var(--gold);
+      color: var(--white);
+      border: none;
+      padding: 16px 36px;
+      border-radius: 100px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.2s;
+      display: inline-block;
+    }
+    .btn-primary:hover { background: #a8790f; transform: translateY(-2px); }
+    .btn-ghost {
+      font-family: var(--body);
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      background: transparent;
+      color: var(--blush);
+      border: 1.5px solid rgba(250,240,236,0.45);
+      padding: 16px 36px;
+      border-radius: 100px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: border-color 0.2s, color 0.2s;
+      display: inline-block;
+    }
+    .btn-ghost:hover { border-color: var(--gold-lt); color: var(--gold-lt); }
+
+    /* ── Trust Strip ── */
+    .trust {
+      background: var(--blush-dark);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      padding: 20px 0;
+      overflow: hidden;
+    }
+    .trust-track {
+      display: flex;
+      gap: 48px;
+      white-space: nowrap;
+      font-family: var(--body);
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .trust-track span.hl { color: var(--crimson); font-weight: 600; }
+
+    /* ── About ── */
+    .about {
+      padding: clamp(70px, 10vw, 120px) 0;
+      background: var(--blush);
+    }
+    .about-grid {
+      display: grid;
+      gap: 60px;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+    }
+    .eyebrow {
+      font-family: var(--body);
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      display: block;
+      margin-bottom: 16px;
+    }
+    .section-title {
+      font-family: var(--display);
+      font-size: clamp(2rem, 4vw, 3.4rem);
+      font-weight: 400;
+      color: var(--crimson);
+      line-height: 1.18;
+      margin-bottom: 22px;
+    }
+    .section-title em {
+      font-style: italic;
+      font-weight: 300;
+    }
+    .body-text {
+      font-family: var(--body);
+      font-size: 1rem;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.85;
+      margin-bottom: 16px;
+    }
+    .about-visual {
+      background: var(--crimson);
+      border-radius: 20px;
+      padding: 56px 44px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .about-visual::before {
+      content: "";
+      position: absolute;
+      top: -40px; right: -40px;
+      width: 180px; height: 180px;
+      border-radius: 50%;
+      border: 1px solid rgba(198,146,42,0.3);
+      pointer-events: none;
+    }
+    .about-visual blockquote {
+      font-family: var(--display);
+      font-size: clamp(1.4rem, 2.5vw, 2rem);
+      font-style: italic;
+      font-weight: 300;
+      color: var(--blush);
+      line-height: 1.5;
+    }
+    .about-visual cite {
+      display: block;
+      margin-top: 24px;
+      font-family: var(--body);
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-style: normal;
+    }
+
+    /* ── Stats ── */
+    .stats {
+      background: var(--blush-dark);
+      padding: clamp(50px, 8vw, 80px) 0;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 40px;
+      text-align: center;
+    }
+    .stat-num {
+      font-family: var(--display);
+      font-size: clamp(2.8rem, 5vw, 4rem);
+      font-weight: 500;
+      color: var(--crimson);
+      display: block;
+      line-height: 1;
+    }
+    .stat-label {
+      font-family: var(--body);
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 8px;
+      display: block;
+    }
+    .stat-divider {
+      width: 32px;
+      height: 1px;
+      background: var(--gold);
+      margin: 10px auto 0;
+    }
+
+    /* ── Testimonial ── */
+    .testimonial {
+      padding: clamp(70px, 10vw, 120px) 0;
+      background: var(--crimson);
+      text-align: center;
+    }
+    .testimonial .eyebrow { color: var(--gold-lt); }
+    .testimonial .section-title { color: var(--blush); margin-bottom: 48px; }
+    .tcard {
+      max-width: 680px;
+      margin: 0 auto;
+      background: rgba(250,240,236,0.07);
+      border: 1px solid rgba(198,146,42,0.25);
+      border-radius: 20px;
+      padding: 48px 44px;
+    }
+    .tcard .quote {
+      font-family: var(--display);
+      font-size: clamp(1.4rem, 2.5vw, 1.9rem);
+      font-style: italic;
+      font-weight: 300;
+      color: var(--blush);
+      line-height: 1.6;
+    }
+    .tcard .stars {
+      color: var(--gold);
+      font-size: 1.1rem;
+      display: block;
+      margin-bottom: 20px;
+      letter-spacing: 4px;
+    }
+    .tcard .author {
+      display: block;
+      margin-top: 24px;
+      font-family: var(--body);
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(250,240,236,0.5);
+    }
+
+    /* ── CTA ── */
+    .cta {
+      padding: clamp(70px, 10vw, 120px) 0;
+      background: var(--blush);
+      text-align: center;
+    }
+    .cta .section-title { margin-bottom: 14px; }
+    .cta .body-text { max-width: 480px; margin: 0 auto 36px; }
+    .btn-crimson {
+      font-family: var(--body);
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      background: var(--crimson);
+      color: var(--white);
+      border: none;
+      padding: 16px 40px;
+      border-radius: 100px;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .btn-crimson:hover { background: var(--crimson-dk); transform: translateY(-2px); }
+
+    /* ── Font Specimen ── */
+    .specimen {
+      background: var(--white);
+      padding: clamp(50px, 8vw, 80px) 0;
+      border-top: 1px solid var(--line);
+    }
+    .specimen-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      margin-top: 40px;
+    }
+    .font-card {
+      background: var(--blush);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 36px;
+    }
+    .font-label {
+      font-family: var(--body);
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 600;
+      margin-bottom: 20px;
+      display: block;
+    }
+    .font-display-sample {
+      font-family: var(--display);
+      font-size: 2.6rem;
+      font-weight: 400;
+      color: var(--crimson);
+      line-height: 1.15;
+      margin-bottom: 10px;
+    }
+    .font-display-italic {
+      font-family: var(--display);
+      font-size: 2.6rem;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--gold);
+      line-height: 1.15;
+    }
+    .font-body-sample {
+      font-family: var(--body);
+      font-size: 1rem;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.8;
+      margin-top: 16px;
+    }
+    .font-body-caps {
+      font-family: var(--body);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 12px;
+    }
+
+    /* ── Footer note ── */
+    .note {
+      background: var(--crimson);
+      color: var(--blush);
+      text-align: center;
+      padding: 20px;
+      font-family: var(--body);
+      font-size: 0.78rem;
+      letter-spacing: 0.06em;
+      opacity: 0.8;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Nav -->
+<nav class="nav">
+  <a class="nav-brand" href="#">Riwaaz <span>Entertainment</span></a>
+  <ul class="nav-links">
+    <li><a href="#">About</a></li>
+    <li><a href="#">Services</a></li>
+    <li><a href="#">Reviews</a></li>
+    <li><a href="#">Contact</a></li>
+  </ul>
+  <button class="btn-nav">Get In Touch</button>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="wrap">
+    <span class="hero-eyebrow">Wedding &amp; Event Planners, Jodhpur</span>
+    <h1>Your Celebration.<br><em>Our Riwaaz.</em></h1>
+    <p class="hero-sub">From royal destination weddings to intimate family gatherings, we craft celebrations that Jodhpur remembers.</p>
+    <div class="hero-ctas">
+      <a href="#" class="btn-primary">Plan Your Event</a>
+      <a href="#" class="btn-ghost">See What We Do</a>
+    </div>
+  </div>
+</section>
+
+<!-- Trust Strip -->
+<div class="trust">
+  <div class="wrap">
+    <div class="trust-track">
+      <span class="hl">200+ Events</span>
+      <span>&nbsp;&nbsp;*&nbsp;&nbsp;</span>
+      <span>Weddings</span>
+      <span>&nbsp;&nbsp;*&nbsp;&nbsp;</span>
+      <span class="hl">10+ Years</span>
+      <span>&nbsp;&nbsp;*&nbsp;&nbsp;</span>
+      <span>Destination Weddings</span>
+      <span>&nbsp;&nbsp;*&nbsp;&nbsp;</span>
+      <span class="hl">4.9 Google Rating</span>
+      <span>&nbsp;&nbsp;*&nbsp;&nbsp;</span>
+      <span>Private Celebrations</span>
+      <span>&nbsp;&nbsp;*&nbsp;&nbsp;</span>
+      <span>Corporate Events</span>
+    </div>
+  </div>
+</div>
+
+<!-- About -->
+<section class="about">
+  <div class="wrap">
+    <div class="about-grid">
+      <div>
+        <span class="eyebrow">Who We Are</span>
+        <h2 class="section-title">Jodhpur Is Home.<br><em>Rajasthan Is Our Stage.</em></h2>
+        <p class="body-text">For over 10 years, Riwaaz Entertainment has been crafting weddings and celebrations that feel distinctly Rajasthani — not just in setting, but in spirit. We know every venue, every vendor, and every moving part of a celebration here.</p>
+        <p class="body-text">200+ events, 4.9 Google rating, 50+ vendor partners built on actual working relationships.</p>
+      </div>
+      <div class="about-visual">
+        <blockquote>&ldquo;Every detail handled so your family gets to be present at your own wedding.&rdquo;</blockquote>
+        <cite>Riwaaz Entertainment &nbsp;·&nbsp; Jodhpur</cite>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Stats -->
+<section class="stats">
+  <div class="wrap">
+    <div class="stats-grid">
+      <div>
+        <span class="stat-num">200+</span>
+        <div class="stat-divider"></div>
+        <span class="stat-label">Events Delivered</span>
+      </div>
+      <div>
+        <span class="stat-num">4.9★</span>
+        <div class="stat-divider"></div>
+        <span class="stat-label">Google Rating</span>
+      </div>
+      <div>
+        <span class="stat-num">10+</span>
+        <div class="stat-divider"></div>
+        <span class="stat-label">Years in Jodhpur</span>
+      </div>
+      <div>
+        <span class="stat-num">50+</span>
+        <div class="stat-divider"></div>
+        <span class="stat-label">Vendor Partners</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonial -->
+<section class="testimonial">
+  <div class="wrap">
+    <span class="eyebrow">What Families Say</span>
+    <h2 class="section-title">In Their Own Words</h2>
+    <div class="tcard">
+      <span class="stars">★★★★★</span>
+      <p class="quote">&ldquo;Made our wedding day feel truly one of a kind. We didn't have to worry about a single thing.&rdquo;</p>
+      <span class="author">Deepak K. &nbsp;·&nbsp; Google Review</span>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <div class="wrap">
+    <span class="eyebrow">Start the Conversation</span>
+    <h2 class="section-title">Let's Plan Your<br><em>Perfect Event</em></h2>
+    <p class="body-text">Tell us about your celebration and we'll come back to you with an honest first conversation — no sales pitch, no pressure.</p>
+    <a href="#" class="btn-crimson">Chat on WhatsApp</a>
+  </div>
+</section>
+
+<!-- Font Specimen -->
+<section class="specimen">
+  <div class="wrap">
+    <div class="text-center">
+      <span class="eyebrow">Font Pairing Used</span>
+      <h2 class="section-title" style="font-size:2rem;">Cormorant Garamond + Jost</h2>
+    </div>
+    <div class="specimen-grid">
+      <div class="font-card">
+        <span class="font-label">Display Font — Cormorant Garamond</span>
+        <div class="font-display-sample">Riwaaz Entertainment</div>
+        <div class="font-display-italic">Your Celebration.</div>
+        <p class="font-body-sample">Used for all headings, hero text, testimonial quotes, and the brand name. Tall, aristocratic, and distinctly bridal.</p>
+      </div>
+      <div class="font-card">
+        <span class="font-label">Body Font — Jost</span>
+        <div style="font-family:'Jost',sans-serif; font-size:1.6rem; font-weight:300; color:#2A1018; margin-bottom:8px;">Wedding &amp; Event Planners</div>
+        <div class="font-body-caps">About &nbsp;·&nbsp; Services &nbsp;·&nbsp; Contact</div>
+        <p class="font-body-sample">Used for all body copy, nav links, buttons, eyebrow labels, and captions. Geometric, clean, and modern — creates perfect contrast with the serif.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<p class="note">Sample only — colour palette: Blush #FAF0EC &nbsp;·&nbsp; Crimson #7B1428 &nbsp;·&nbsp; Antique Gold #C6922A</p>
+
+</body>
+</html>

@@ -2,30 +2,30 @@
    Design Tokens
    ========================================================================== */
 :root {
-  --deep-wine: #6B1D3A;
-  --wine-light: #8B2D52;
-  --marigold: #F5A623;
-  --marigold-soft: #FCEABB;
-  --hot-pink: #E8447A;
-  --cream: #FFF8F0;
+  --deep-wine: #7B1428;          /* crimson — matched from logo "R"       */
+  --wine-light: #9B2438;         /* lighter crimson for hover states      */
+  --marigold: #C6922A;           /* antique gold — matched from logo ring */
+  --marigold-soft: #F0DEB8;      /* pale gold tint                        */
+  --hot-pink: #C05070;           /* muted rose (kept for legacy)          */
+  --cream: #FAF0EC;              /* blush — logo background colour        */
   --ivory: #FFFFFF;
-  --charcoal: #1A1A1A;
+  --charcoal: #2A1018;           /* warm near-black                       */
   --deep-teal: #1B6B5F;
-  --gold: #C5973E;
-  --gold-soft: #E7D2A0;
-  --soft-pink: #FDE8EF;
-  --text-primary: #2D2D2D;
-  --text-muted: rgba(45, 45, 45, 0.65);
-  --line: rgba(45, 45, 45, 0.1);
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
-  --shadow-md: 0 8px 30px rgba(0, 0, 0, 0.1);
-  --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.15);
+  --gold: #C6922A;               /* antique gold                          */
+  --gold-soft: #E8D5BE;          /* soft gold tint                        */
+  --soft-pink: #F2E1D8;          /* deeper blush for section contrast     */
+  --text-primary: #2A1018;       /* warm near-black                       */
+  --text-muted: #7A5A62;         /* warm muted mauve                      */
+  --line: #E8D5CE;               /* soft warm divider                     */
+  --shadow-sm: 0 2px 8px rgba(123, 20, 40, 0.06);
+  --shadow-md: 0 8px 30px rgba(123, 20, 40, 0.10);
+  --shadow-lg: 0 20px 60px rgba(123, 20, 40, 0.15);
   --radius: 12px;
   --radius-lg: 20px;
 
-  --font-display: 'Playfair Display', serif;
-  --font-body: 'DM Sans', sans-serif;
-  --font-accent: 'Dancing Script', cursive;
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-body:    'Jost', system-ui, sans-serif;
+  --font-accent:  'Cormorant Garamond', Georgia, serif;
 }
 
 /* ==========================================================================
@@ -54,7 +54,7 @@ body {
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-display);
   color: var(--deep-wine);
-  font-weight: 700;
+  font-weight: 500;
   margin-top: 0;
   margin-bottom: 0;
 }
