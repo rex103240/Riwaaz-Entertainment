@@ -351,27 +351,59 @@ document.addEventListener('DOMContentLoaded', () => {
         renderCalendar();
     }
 
-    // 10. Enquiry Form to WhatsApp
+    // 10. Enquiry Form → Google Sheets
+    const SHEET_URL = 'https://script.google.com/macros/s/AKfycbye3lcZfLYBN-vnB_AfLZlXqdxuYQv4168VWQKutybZWyh8YfUwB9t1_Jqw047QGre3/exec';
     const form = document.getElementById('enquiryForm');
     if (form) {
-        form.addEventListener('submit', (e) => {
+        form.addEventListener('submit', async (e) => {
             e.preventDefault();
-            
-            const name = document.getElementById('formName')?.value.trim() || 'Not specified';
-            const phone = document.getElementById('formPhone')?.value.trim() || 'Not specified';
-            const eventType = document.getElementById('formEvent')?.value.trim() || 'Not specified';
-            const dateVal = document.getElementById('formDate')?.value.trim() || '';
-            const dateDisplay = document.getElementById('dateValue')?.textContent || '';
-            const dateFinal = (dateVal && !dateDisplay.includes('Pick')) ? dateDisplay : 'Not specified';
-            const message = document.getElementById('formMessage')?.value.trim() || '';
 
-            let waMessage = `Hi Riwaaz Entertainment!\n\nName: ${name}\nPhone: ${phone}\nEvent: ${eventType}\nDate: ${dateFinal}\n`;
-            if (message) {
-                waMessage += `\n${message}`;
+            const name      = document.getElementById('formName')?.value.trim()    || '';
+            const phone     = document.getElementById('formPhone')?.value.trim()   || '';
+            const eventType = document.getElementById('formEvent')?.value.trim()   || 'Not specified';
+            const dateDisplay = document.getElementById('dateValue')?.textContent  || '';
+            const dateVal   = document.getElementById('formDate')?.value.trim()    || '';
+            const eventDate = (dateVal && !dateDisplay.includes('Pick')) ? dateDisplay : 'Not specified';
+            const message   = document.getElementById('formMessage')?.value.trim() || '';
+
+            const submitBtn = form.querySelector('.form-submit');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Sending…';
+            submitBtn.disabled = true;
+
+            try {
+                await fetch(SHEET_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, phone, eventType, eventDate, message })
+                });
+
+                // Success state
+                form.reset();
+                // Reset custom UI elements
+                const selectVal = document.getElementById('selectValue');
+                if (selectVal) selectVal.textContent = 'Select event type';
+                const dateValueEl = document.getElementById('dateValue');
+                if (dateValueEl) dateValueEl.textContent = 'Pick a date';
+
+                submitBtn.textContent = '✓ Enquiry Sent!';
+                submitBtn.style.background = '#2a7a4b';
+                setTimeout(() => {
+                    submitBtn.textContent = originalText;
+                    submitBtn.style.background = '';
+                    submitBtn.disabled = false;
+                }, 4000);
+
+            } catch (err) {
+                submitBtn.textContent = 'Failed — try again';
+                submitBtn.style.background = '#c0392b';
+                setTimeout(() => {
+                    submitBtn.textContent = originalText;
+                    submitBtn.style.background = '';
+                    submitBtn.disabled = false;
+                }, 3000);
             }
-
-            const waUrl = `https://wa.me/919887577752?text=${encodeURIComponent(waMessage)}`;
-            window.open(waUrl, '_blank');
         });
     }
 
