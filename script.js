@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Mobile Blogs dropdown toggle
+    // Mobile Services dropdown toggle
     const mobileDropdownToggle = document.getElementById('mobileDropdownToggle');
     const mobileDropdownLinks = document.getElementById('mobileDropdownLinks');
     if (mobileDropdownToggle && mobileDropdownLinks) {
@@ -34,6 +34,18 @@ document.addEventListener('DOMContentLoaded', () => {
             mobileDropdownLinks.classList.toggle('open');
             const isOpen = mobileDropdownToggle.classList.contains('open');
             mobileDropdownToggle.setAttribute('aria-expanded', isOpen);
+        });
+    }
+
+    // Mobile Blog dropdown toggle
+    const mobileDropdownToggle2 = document.getElementById('mobileDropdownToggle2');
+    const mobileDropdownLinks2 = document.getElementById('mobileDropdownLinks2');
+    if (mobileDropdownToggle2 && mobileDropdownLinks2) {
+        mobileDropdownToggle2.addEventListener('click', () => {
+            mobileDropdownToggle2.classList.toggle('open');
+            mobileDropdownLinks2.classList.toggle('open');
+            const isOpen = mobileDropdownToggle2.classList.contains('open');
+            mobileDropdownToggle2.setAttribute('aria-expanded', isOpen);
         });
     }
 
